@@ -1,4 +1,4 @@
-/.idea/*
-/venv/*
-/resources/*
+.idea/*
+venv/*
+resources/*
 
