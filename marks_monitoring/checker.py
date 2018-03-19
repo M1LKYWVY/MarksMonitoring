@@ -1,4 +1,8 @@
-from selenium import webdriver
+try:
+    from selenium import webdriver
+except ImportError:
+    print("Please check that selenium package installed through pip3 successfully")
+    exit(1)
 
 
 def check_de_ifmo(user):

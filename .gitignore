@@ -1,6 +1,6 @@
 .idea/*
 venv/*
 resources/*
-marks_monitoring/configs.py
 *.ini
+*.vdb
 

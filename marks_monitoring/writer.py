@@ -1,8 +1,8 @@
-def write(collection, file):
+def write(collection, path_to_file):
         # TODO make writer
         pass
 
 
-def read(file):
+def read(path_to_file):
         # TODO make reader
         pass
