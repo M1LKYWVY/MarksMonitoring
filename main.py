@@ -1,5 +1,6 @@
 from marks_monitoring import tg_bot
 from marks_monitoring import writer
+import sys
 
 try:
     from selenium import webdriver
@@ -8,16 +9,14 @@ except ImportError:
 
 
 def main():
-    options = webdriver.ChromeOptions()
-    options.add_argument("headless")
-    options.add_argument("window-size=1200x600W")
-    driver = webdriver.Chrome("resources\\chromedriver.exe", chrome_options=options)
-    driver.get("https://facebook.com")
-    driver.get_screenshot_as_file("main-page.png")
+    if len(sys.argv) == 1:
+        print("Please check path to file data.json")
+        return
+    file = open(sys.argv[1], mode="r")
+    tg_bot.data = writer.read(file)
+    tg_bot.bot.polling(non_stop=True)
+    # TODO change file
 
 
 if __name__ == "__main__":
-    tg_bot.bot.polling(non_stop=True)
-    tg_bot.data = writer.read("")
-    # TODO change file
     main()
