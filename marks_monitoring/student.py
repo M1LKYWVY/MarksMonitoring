@@ -1,4 +1,4 @@
-class User:
+class Student(object):
     def __init__(self, name, surname, user_name, password, tg_chat_id=54221364):
         self.name = name
         self.surname = surname
