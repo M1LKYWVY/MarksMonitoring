@@ -1,0 +1,2 @@
+pytelegrambotapi>=1.4.2
+selenium>=3
