@@ -1,8 +1,9 @@
 from marks_monitoring import tg_bot
+import threading
 
 
 def main():
-    tg_bot.bot.polling(none_stop=True)
+    threading.Thread(target=lambda: tg_bot.bot.polling(none_stop=True)).start()
     print("Telegram bot started successfully")
 
 

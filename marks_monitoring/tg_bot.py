@@ -21,12 +21,12 @@ def get_condition(message):
 
 
 @bot.message_handler(content_types=["text"], commands=["change_semester"])
-def change(message):
+def change_semester(message):
     print("qqq" + message.text)
 
 
 @bot.message_handler(content_types=["text"], commands=["check_condition"])
-def check(message):
+def check_condition(message):
     print("qqqq" + message.text)
 
 
@@ -36,5 +36,5 @@ def greeting(message):
 
 
 @bot.message_handler(content_types=["text"])
-def last_commands(message):
+def unrecognized_commands(message):
     print("q" + message.text)
