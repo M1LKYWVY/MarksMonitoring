@@ -34,17 +34,17 @@ def check_de_ifmo(student):
     driver.find_element_by_css_selector(".signin > input:nth-child(7)").click()
     driver.find_element_by_css_selector("#d_s_m_menu > ul:nth-child(13) > li:nth-child(1) > a:nth-child(1)").click()
     driver.get_screenshot_as_file("main-page.png")
-
-    for i in range(3, 50):
+    skip_rows = True
+    for i in range(3, 30):
         x = driver.find_element_by_css_selector("div.d_text:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) "
                                                 "> tr:nth-child(" + str(i) + ")")
         if len(str(x.text)) <= 12:
             print(x.text == "Семестр 4")
             continue
-        for j in range(1, 3):
-            q = x.find_element_by_css_selector("td:nth-child(" + str(j+2) + ")")
-            print(q.text)
-        f = driver.find_element_by_css_selector("div.d_text:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) "
-                                                "> tr:nth-child(3) > td:nth-child(4)")
-        g = driver.find_element_by_css_selector("div.d_text:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) "
-                                                "> tr:nth-child(4)")
+        q = x.find_element_by_css_selector("td:nth-child(" + str(3) + ")")
+        q = x.find_element_by_css_selector("td:nth-child(" + str(4) + ")")
+        # f = driver.find_element_by_css_selector("div.d_text:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) "
+        #                                         "> tr:nth-child(3) > td:nth-child(4)")
+        # g = driver.find_element_by_css_selector("div.d_text:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) "
+        #                                         "> tr:nth-child(4)")
+    driver.close()
