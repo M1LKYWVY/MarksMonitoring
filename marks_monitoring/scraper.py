@@ -1,7 +1,5 @@
 import configparser
 
-import time
-
 try:
     from selenium import webdriver, common
 except ImportError(webdriver):

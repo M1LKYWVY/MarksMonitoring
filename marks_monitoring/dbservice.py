@@ -1,5 +1,4 @@
 import json
-from collections import namedtuple
 from . import student
 
 try:

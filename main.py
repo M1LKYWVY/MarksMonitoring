@@ -14,8 +14,8 @@ def main():
     # print("Telegram bot started successfully")
     # print(datetime.now().strftime("%m"))
     # TODO USE date to check semester
-    # scraper.check_de_ifmo(student.Student("Руслан", "Филичкин", "223619", "papamama1975", 4, 63312273))
-    dbservice.get_user(student.Student("Руслан", "Филичкин", "223619", "papamama1975", 4, 63312273))
+    scraper.check_de_ifmo(student.Student("Руслан", "Филичкин", "223619", "papamama1975", 4, 63312273))
+    # dbservice.get_user(student.Student("Руслан", "Филичкин", "223619", "papamama1975", 4, 63312273))
 
 
 if __name__ == "__main__":
