@@ -2,7 +2,7 @@ import configparser
 
 try:
     import telebot
-except ImportError:
+except ImportError(telebot):
     print("Please check that telebot package was installed through pip3 successfully.")
 
 try:

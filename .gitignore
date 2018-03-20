@@ -1,6 +1,7 @@
 .idea/*
 venv/*
-resources/*
+*.exe
 *.ini
 *.vdb
+*.png
 
