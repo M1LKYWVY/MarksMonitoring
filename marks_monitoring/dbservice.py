@@ -11,7 +11,7 @@ except ImportError(Vedis):
 def __parse_student(dictionary):
     obj = student.Student(dictionary["name"],
                           dictionary["surname"],
-                          dictionary["user_name"],
+                          dictionary["login"],
                           dictionary["password"],
                           dictionary["active_semester"],
                           dictionary["tg_chat_id"])
@@ -29,11 +29,5 @@ def save_user(tg_chat_id, user):
 
 
 def get_user(tg_chat_id):
-    # with Vedis("database.vdb") as db:
-    #     return json.loads(db[tg_chat_id], object_hook=lambda obj: namedtuple("Student", obj.keys())(*obj.values()))
-    # Down case works fine
     with Vedis("database.vdb") as db:
         return __json_loads(db[tg_chat_id])
-    # x = json.dumps(tg_chat_id, default=lambda obj: obj.__dict__)
-    # print(x)
-    # print(type(__json_loads(x)))

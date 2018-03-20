@@ -1,4 +1,5 @@
 import configparser
+from . import dbservice
 
 try:
     from selenium import webdriver, common
@@ -30,23 +31,27 @@ def check_de_ifmo(student):
         exit(1)
     driver.get("https://de.ifmo.ru/?node=signin")
     driver.implicitly_wait(10)
-    driver.find_element_by_id("login").send_keys(student.user_name)
+    driver.find_element_by_id("login").send_keys(student.login)
     driver.find_element_by_id("password").send_keys(student.password)
     driver.find_element_by_css_selector(".signin > input:nth-child(7)").click()
-    driver.find_element_by_css_selector("#d_s_m_menu > ul:nth-child(13) > li:nth-child(1) > a:nth-child(1)").click()
+    try:
+        driver.find_element_by_css_selector("#d_s_m_menu > ul:nth-child(13) > li:nth-child(1) > a:nth-child(1)").click()
+    except common.exceptions.NoSuchElementException:
+        return True
     driver.get_screenshot_as_file("main-page.png")
     table_rows = driver.find_element_by_css_selector("div.d_text:nth-child(1) > table:nth-child(1)")\
         .find_elements_by_tag_name("tr")
     skip_rows = True
     dictionary = {}
+
     for row in table_rows:
         if "Семестр" in row.text:
             if str(student.active_semester) in row.text:
+                dictionary["Семестр"] = student.active_semester
                 skip_rows = False
                 continue
             if str(student.active_semester) not in row.text and not skip_rows:
-                skip_rows = True
-                continue
+                break
         if skip_rows:
             continue
 
@@ -85,6 +90,6 @@ def check_de_ifmo(student):
     #     print(var, " ", dictionary[var])
     # for var in student.points[3]:
     #     print(var)
-    student.points.insert(student.active_semester-1, dictionary)
+    student.points.insert(0, dictionary)
+    dbservice.save_user(student.tg_chat_id, student)
     driver.close()
-    return student
