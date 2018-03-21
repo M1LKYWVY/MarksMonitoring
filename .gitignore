@@ -1,7 +1,10 @@
 .idea/*
 venv/*
+build/*
+dist/*
 *.exe
 *.ini
 *.vdb
 *.png
-
+*.pyz
+*.spec

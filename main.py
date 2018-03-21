@@ -1,11 +1,4 @@
-from datetime import datetime
-from collections import namedtuple
-
 from marks_monitoring import tg_bot
-from marks_monitoring import student
-from marks_monitoring import scraper
-from marks_monitoring import dbservice
-import json
 import threading
 
 

@@ -20,13 +20,13 @@ sudo python -m pip install -r requirements.txt
 ### Build
 
 ```sh
-python -m zipapp "\\\location of root directory of ypur project\\\" -m main:main -o \\\your .pyz file name\\\.pyz
+pyinstaller --onefile main.py
 ```
 
 ### Run
 
 ```sh
-python -m \\\your .pyz file name\\\.pyz
+main.exe
 ```
 
 ##

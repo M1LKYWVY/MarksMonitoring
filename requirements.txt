@@ -2,3 +2,4 @@ pytelegrambotapi>=3.6.1
 selenium>=3.11.0
 cython>=0.28.1
 vedis>=0.6.0
+pyinstaller
