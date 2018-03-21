@@ -29,14 +29,28 @@ def get_condition(message):
 
 @bot.message_handler(content_types=["text"], commands=["change_semester"])
 def change_semester(message):
-    bot.send_message(message.from_user.id, "Feature in development")
+    stu = dbservice.get_user(message.from_user.id)
+    arr = message.text.split(" ")
+    if arr[1] is None:
+        bot.send_message(stu.tg_chat_id, "Кам он, не могу распарсить")
+        return
+    try:
+        stu.active_semester = int(arr[1])
+    except Exception:
+        bot.send_message(stu.tg_chat_id, "Кам он, не могу распарсить")
+        return
+    bot.send_message(stu.tg_chat_id, "Сменил сем, радуйся")
+    dbservice.save_user(stu.tg_chat_id, stu)
 
 
 @bot.message_handler(content_types=["text"], commands=["check_points"])
 def check_condition(message):
+    stu = dbservice.get_user(message.from_user.id)
+    if stu is True:
+        bot.send_message(message.from_user.id, "Ну ты же не зарегался")
+        return
     bot.send_message(message.from_user.id, "Проверка запущена, жди")
-    is_pass_incorrect = scraper.check_de_ifmo(dbservice.get_user(message.from_user.id))
-    print(is_pass_incorrect)
+    is_pass_incorrect = scraper.check_de_ifmo(stu)
     if is_pass_incorrect:
         bot.send_message(message.from_user.id, "Проверь пароли, не надо тормози")
         return
@@ -50,15 +64,18 @@ def register(message):
         if el is None:
             bot.send_message(message.from_user.id, "ты чего, издеваешься, проверь пасы")
             return
-    try:
-        stu = dbservice.get_user(message.from_user.id)
-        stu.password = arr[2]
-        stu.login = arr[1]
-    except KeyError:
+
+    stu = dbservice.get_user(message.from_user.id)
+    if stu is True:
         stu = student.Student(message.from_user.first_name, message.from_user.last_name, arr[1], arr[2], 4,
                               message.from_user.id)
-        dbservice.save_user(stu.tg_chat_id, stu)
         bot.send_message(message.from_user.id, "Ты был зарегистрирован. Можешь юзать сервис.")
+    else:
+
+        stu.password = arr[2]
+        stu.login = arr[1]
+        bot.send_message(message.from_user.id, "Обновил твои пасы")
+    dbservice.save_user(stu.tg_chat_id, stu)
 
 
 @bot.message_handler(content_types=["text"], commands=["start"])
@@ -71,7 +88,7 @@ def greeting(message):
                                            "login, password - логин и пасс для de.ifmo.ru\n"
                                            "/register login password\n"
                                            "Пример: /register 223619 lyblbyphp\n"
-                                           "И да, если ошибся, продублируй команду /register с правильными пасами\n"
+                                           "И да, если ошибся, продублируй команду /register с правильными пасами.\n"
                                            "Только учти, что указать надо будет и логин, и пароль.")
 
 

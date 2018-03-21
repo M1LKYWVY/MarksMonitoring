@@ -30,4 +30,7 @@ def save_user(tg_chat_id, user):
 
 def get_user(tg_chat_id):
     with Vedis("database.vdb") as db:
-        return __json_loads(db[tg_chat_id])
+        try:
+            return __json_loads(db[tg_chat_id])
+        except KeyError:
+            return True
