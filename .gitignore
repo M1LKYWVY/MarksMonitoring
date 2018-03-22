@@ -8,3 +8,5 @@ dist/*
 *.png
 *.pyz
 *.spec
+__pycache__/*
+
